@@ -36,7 +36,10 @@
           </p>
       <%end%>
     </div>
-
+    <br>
+    <div>
+      <%= form.file_field :images, multiple: true %>
+    </div>
     <br>
     <div>
       <%= form.submit class: "btn btn-primary col-12" %>
