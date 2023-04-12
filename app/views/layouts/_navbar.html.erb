@@ -3,12 +3,22 @@
   <div>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/posts/new">Upload Post</a>
+        <%= link_to "Upload post", new_post_path, class: "nav-link" %>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="/home/about">About</a>
+        <%= link_to "About", home_about_path, class: "nav-link" %>
       </li>
+      
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to "Sign out", destroy_user_session_path, class: "nav-link text-danger" %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </nav>
