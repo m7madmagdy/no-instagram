@@ -1,9 +1,10 @@
 <div class="row" style="margin-top: 10px;">
+  <h1 style="text-align: center;">New post</h1>
   <%= render "form", post: @post %>
 </div>
 
 <br>
 
-<div>
-  <%= link_to "Back to posts", posts_path %>
+<div style="text-align: center;">
+  <%= link_to "Back to posts", posts_path, class: "btn btn-secondary col-4" %>
 </div>
