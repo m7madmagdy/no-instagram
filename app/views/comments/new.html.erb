@@ -1,0 +1,8 @@
+<div style="margin: 20px">
+  <h1>New comment</h1>
+
+  <%= render "form", comment: @comment %>
+  <div style="margin-top: 10px">
+    <%= link_to "Back to comments", comments_path, class: "btn btn-secondary col-2" %>
+  </div>
+</div>
