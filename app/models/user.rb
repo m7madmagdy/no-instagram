@@ -5,9 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :posts
+  has_many :comments
 
   private
-
   def randomize_id
     begin
       self.id = SecureRandom.random_number(1_000_000_000)
