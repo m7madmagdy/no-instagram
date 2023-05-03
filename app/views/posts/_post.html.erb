@@ -1,12 +1,13 @@
 <div id="<%= dom_id post %>" class="post-container">
+  <h5 style="text-align: left;">
+    <%= post.user.email %>
+  </h5>
   <p>
     <%= post.title %>
   </p>
-
   <p>
     <%= post.description %>
   </p>
-
   <p>
     <%= post.keywords %>
   </p>
