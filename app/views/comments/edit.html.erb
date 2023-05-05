@@ -1,10 +1,7 @@
-<h1>Editing comment</h1>
-
+<h1 style="text-align: center; margin-top: 20px;">Editing comment</h1>
 <%= render "form", comment: @comment %>
-
 <br>
-
-<div>
-  <%= link_to "Show this comment", @comment %> |
-  <%= link_to "Back to comments", comments_path %>
+<div style="margin-left: 20px; text-align: center;">
+  <%= link_to "Show this comment", @comment, class: "btn btn-success col-2" %>
+  <%= link_to "Back to comments", comments_path, class: "btn btn-secondary col-2" %>
 </div>

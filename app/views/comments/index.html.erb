@@ -1,14 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Comments</h1>
+<div style="margin-left: 10px">
+  <h1 style="margin-left: 10px;">Comments <%= link_to "New comment", new_comment_path, class: "btn btn-outline-success" %></h1>
+</div>
 
 <div id="comments">
   <% @comments.each do |comment| %>
     <%= render comment %>
-    <p>
-      <%= link_to "Show this comment", comment %>
-    </p>
   <% end %>
 </div>
 
-<%= link_to "New comment", new_comment_path %>
