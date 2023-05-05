@@ -10,9 +10,13 @@
   <% end %>
   <div style="margin-bottom: 10px; margin-top: 10px;">
     <%= render "comments/form", comment: @comment %>
-    <%- @post.comments.each do |comment| %>
-      <%= comment.text %>
-    <% end %>
   </div>
   <%= link_to "Back to posts", posts_path, class: "btn btn-secondary col-2" %>
+
+  <div style="margin-top: 10px">
+    <h5>Comments</h5>
+    <% @post.comments.each do |comment| %>
+      <h6><%= comment.text %></h6>
+    <% end %>
+  </div>
 </div>

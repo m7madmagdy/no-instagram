@@ -2,9 +2,9 @@
 
 <%= render @comment %>
 
-<div>
-  <%= link_to "Edit this comment", edit_comment_path(@comment) %> |
-  <%= link_to "Back to comments", comments_path %>
-
-  <%= button_to "Destroy this comment", @comment, method: :delete %>
+<div style="margin: 10px;">
+  <%= link_to "Edit this comment", edit_comment_path(@comment), class: "btn btn-success col-2" %>
+  <%= button_to "Destroy this comment", @comment, method: :delete, class: "btn btn-danger col-2", style: "margin-top: 10px;" %>
+  <br>
+  <%= link_to "Back to comments", comments_path, class: "btn btn-secondary col-2" %>
 </div>

@@ -1,4 +1,5 @@
-<div id="<%= dom_id comment %>">
+<div id="<%= dom_id comment %>" class="post-container">
+
   <p>
     <strong>Text:</strong>
     <%= comment.text %>
@@ -13,5 +14,7 @@
     <strong>Post:</strong>
     <%= comment.post_id %>
   </p>
-
+  <p>
+    <%= link_to "", comment, class: "post-link" %>
+  </p>
 </div>
