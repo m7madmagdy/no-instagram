@@ -1,20 +1,9 @@
 <div id="<%= dom_id post %>" class="post-container">
-  <h5 style="text-align: left;">
-    <%= post.user.email %>
-  </h5>
-  <p>
-    <%= post.title %>
-  </p>
-  <p>
-    <%= post.description %>
-  </p>
-  <p>
-    <%= post.keywords %>
-  </p>
-  <p>
-    <%= link_to "", post, class: "post-link" %>
-  </p>
   <% post.images.each do |image| %>
-    <%= image_tag(image, style: "object-fit: cover;") %>
+    <%= image_tag(image, style: "object-fit: cover;", size: "100x100") %>
   <% end %>
+  <div class="post-title">
+    <%= post.title %>
+  </div>
+  <%= link_to post.user.username, post.user, style: "z-index" %>
 </div>
