@@ -22,3 +22,29 @@
 .post-link:hover {
     opacity: 0.3;
 }
+
+.unlike {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background-image: url("https://i.imgur.com/5nBIFt3.png");
+    background-size: cover;
+}
+
+.like:hover {
+    opacity: 0.7;
+}
+
+.unlike:hover {
+    opacity: 0.7;
+}
+
+.like {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background-image: url("https://i.imgur.com/RSN1diq.png");
+    background-size: cover;
+}
