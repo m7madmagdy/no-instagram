@@ -11,9 +11,9 @@
     <% if user_signed_in? %>
       <% like = current_user.likes.find_by(post: post) %>
       <% if like.nil? %>
-        <%= button_to "", likes_path, params: { like: { post_id: post.id } }, class: "like btn btn-light", method: :post %>
+        <%= button_to "Like", likes_path, params: { like: { post_id: post.id } }, class: "btn btn-primary btn-sm", method: :post %>
       <% else %>
-        <%= button_to "", like_path(like), class: "unlike btn btn-light", method: :delete %>
+        <%= button_to "Unlike", like_path(like), class: "btn btn-danger btn-sm", method: :delete %>
       <% end %>
     <% end %>
     <p> <%= post.likes.count %> Likes</p>
