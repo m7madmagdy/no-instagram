@@ -10,8 +10,10 @@
     <%= post.title %>
   </div>
   <br>
-  <% post.images.each do |image| %>
-    <%= image_tag(image, style: "object-fit: cover;, width: 400px; height: 400px;") %>
+  <%= link_to(post_path(post.id), class: "post-link") do %>
+    <% post.images.each do |image| %>
+      <%= image_tag(image, style: "object-fit: cover;, width: 400px; height: 400px;") %>
+    <% end %>
   <% end %>
   <div style="margin-top: 10px;">
     <% if user_signed_in? %>
