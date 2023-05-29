@@ -1,22 +1,21 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @post %>
-<div style="margin: 20px;">
+<%= render "comments/form", comment: @comment %>
+
+<div class="post-container">
   <% if user_signed_in? %>
     <% if current_user.id == @post.user.id %>
-      <%= link_to "Edit this post", edit_post_path(@post), class: "btn btn-success col-2" %>
-      <%= button_to "Delete this post", @post, method: :delete, class: "btn btn-danger col-2", style: "margin-top: 10px;" %>
+      <%= link_to "Edit this post", edit_post_path(@post), class: "btn btn-success col-12" %>
+      <%= button_to "Delete this post", @post, method: :delete, class: "btn btn-danger col-12", style: "margin-top: 10px;" %>
     <% end %>
   <% end %>
-  <div style="margin-bottom: 10px; margin-top: 10px;">
-    <%= render "comments/form", comment: @comment %>
-  </div>
-  <%= link_to "Back to posts", posts_path, class: "btn btn-secondary col-2" %>
+  <%= link_to "Back to posts", posts_path, class: "btn btn-secondary col-12", style: "margin-top: 10px;" %>
+</div>
 
-  <div style="margin-top: 10px">
+<div style="margin-top: 10px; text-align: center;">
     <h5>Comments</h5>
     <% @post.comments.each do |comment| %>
       <h6><%= comment.text %></h6>
     <% end %>
-  </div>
 </div>

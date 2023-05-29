@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-12 text-center" style="padding: 20px; background-color: #f2f2f2;">
-    <% if current_user.avatar.attached? %>
-      <%= image_tag current_user.avatar, class: "rounded-circle", width: "150", height: "150" %>
+    <% if @user.avatar.attached? %>
+      <%= image_tag @user.avatar, class: "rounded-circle", width: "150", height: "150" %>
     <% end %>
     <br>
     <h1><%= @user.username %></h1>
     <h4><%= @user.email %></h4>
-    <h1><%= @user.bio %></h1>
+    <h5><%= @user.bio %></h5>
   </div>
 </div>
