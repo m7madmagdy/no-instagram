@@ -1,12 +1,18 @@
 <div id="<%= dom_id post %>" class="post-container">
-  <% post.images.each do |image| %>
-    <%= image_tag(image, style: "object-fit: cover;", size: "100x100") %>
+  <%= link_to(post.user, class: 'nav-link', style: "text-align: left;") do %>
+    <% if post.user.avatar.attached? %>
+      <%= image_tag post.user.avatar, class: "rounded-circle", width: "30", height: "30" %>
+    <% end %>
+    <span class="d-none d-sm-inline mx-1 text-dark"><%= post.user.username %></span>
   <% end %>
+  <br>
   <div class="post-title">
     <%= post.title %>
   </div>
-  <%= link_to post.user.username, post.user, style: "z-index" %>
-
+  <br>
+  <% post.images.each do |image| %>
+    <%= image_tag(image, style: "object-fit: cover;, width: 400px; height: 400px;") %>
+  <% end %>
   <div style="margin-top: 10px;">
     <% if user_signed_in? %>
       <% like = current_user.likes.find_by(post: post) %>
