@@ -4,13 +4,17 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  followability
   has_many :posts, foreign_key: :user_id, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_one_attached :avatar, dependent: :destroy
 
-  private
+  def unfollow(user)
+    followerable_relationships.where(followable_id: user.id).destroy_all
+  end
 
+  private
   def randomize_id
     begin
       self.id = SecureRandom.random_number(1_000_000_000)

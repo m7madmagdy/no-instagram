@@ -1,0 +1,25 @@
+<div class="row">
+  <h4 style="text-align: left">Following</h4>
+  <div class="col-12 text-center" style="padding: 20px; background-color: #f2f2f2;">
+
+    <% if user.avatar.attached? %>
+      <%= image_tag user.avatar, class: "rounded-circle", style: "width: 130px; height: 130px;" %>
+    <% end %>
+    <div>
+      <h4>
+        <%= link_to user.username, user, class: "text-primary", style: "text-decoration: none;" %>
+      </h4>
+    </div>
+    <h6> <%= user.followers.count %> Followers </h6>
+    <h6> <%= user.following.count %> Following </h6>
+    <% if user_signed_in? %>
+      <% if current_user.following?(user) %>
+        <%= button_to "Unfollow", unfollow_path(user), class: "btn btn-outline-danger" %>
+      <% elsif current_user.sent_follow_request_to?(user) %>
+        <%= button_to "Cancel follow request", cancel_path(user), class: "btn btn-outline-danger" %>
+      <% else %>
+        <%= button_to "Follow", follow_path(user), class: "btn btn-outline-success" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
