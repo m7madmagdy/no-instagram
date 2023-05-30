@@ -1,6 +1,6 @@
 # Instagram Clone Website
 
-## [Deployed on Fly.io]("https://insta-clo.fly.dev")
+## [Deployed on Fly.io](https://insta-clo.fly.dev)
 
 **Dependencies**
 
