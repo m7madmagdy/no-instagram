@@ -1,6 +1,6 @@
 # Instagram Clone Website
 
-## I will deploy this app to Heroku ASAP
+## I will deploy this app to Fly.io ASAP
 
 **Dependencies**
 
@@ -30,3 +30,5 @@ $ make up
 ```sh
 $ make console
 ```
+## Website Screenshots
+
