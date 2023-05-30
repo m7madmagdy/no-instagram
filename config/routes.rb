@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :posts
   resources :comments
-  resources :likes, only: [:create, :destroy]
+  resources :likes, only: [:index, :create, :destroy]
 
   devise_scope :user do
     get "/users", to: "devise/registrations#new"
