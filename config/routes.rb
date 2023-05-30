@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :posts
   resources :comments
-  resources :likes, only: [:create, :destroy]
+  resources :likes, only: [:index, :create, :destroy]
 
   devise_scope :user do
     get "/users", to: "devise/registrations#new"
@@ -15,7 +15,13 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: "users/registrations",
   }
-  resources :users, only: [:show]
+  resources :users
+
+  post 'users/:id/follow', to: "users#follow", as: "follow"
+  post 'users/:id/unfollow', to: "users#unfollow", as: "unfollow"
+  post 'users/:id/accept', to: "users#accept", as: "accept"
+  post 'users/:id/decline', to: "users#decline", as: "decline"
+  post 'users/:id/cancel', to: "users#cancel", as: "cancel"
 
   defaults format: :json do
     namespace :api do
