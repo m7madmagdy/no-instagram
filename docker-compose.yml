@@ -13,21 +13,16 @@ services:
     volumes:
       - postgres:/var/lib/postgresql
 
-  redis:
-    image: redis:6.0
-    restart: always
-
   backend:
     image: instagram-backend
     build: .
     entrypoint: ./entrypoint.sh
     ports:
-      - "7080:4000"
+      - "7080:3000"
     volumes:
       - .:/app
     depends_on:
       - db
-      - redis
     env_file:
       - environment.env
     restart: always
