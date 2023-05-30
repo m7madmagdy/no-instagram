@@ -5,13 +5,17 @@ class LikesController < ApplicationController
     unless @like.save
       flash[:alert] = "You already liked this post"
     end
-    redirect_to root_path
+    respond_to do |format|
+      format.js { render 'posts/like' }
+    end
   end
 
   def destroy
     @like = current_user.likes.find(params[:id])
     @like.destroy
-    redirect_to root_path
+    respond_to do |format|
+      format.js { render 'posts/like' }
+    end
   end
 
   def likes_params

@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:13.1
+    env_file:
+      - environment.env
+    restart: always
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: "exit 0"
+    volumes:
+      - postgres:/var/lib/postgresql
+
+  redis:
+    image: redis:6.0
+    restart: always
+
+  backend:
+    image: instagram-backend
+    build: .
+    entrypoint: ./entrypoint.sh
+    ports:
+      - "7080:4000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - environment.env
+    restart: always
+
+volumes:
+  postgres:
+  bundle_path:
