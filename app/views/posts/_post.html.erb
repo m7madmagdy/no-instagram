@@ -1,14 +1,16 @@
 <div id="<%= dom_id post %>" class="post-container">
-  <%= link_to(post.user, class: 'nav-link', style: "text-align: left;") do %>
+  <%= link_to(post.user, class: 'nav-link post-link', style: "text-align: left;") do %>
     <% if post.user.avatar.attached? %>
       <%= image_tag post.user.avatar, class: "rounded-circle", width: "30", height: "30" %>
     <% end %>
     <span class="d-none d-sm-inline mx-1 text-dark"><%= post.user.username %></span>
   <% end %>
   <br>
-  <div class="post-title">
-    <%= post.title %>
-  </div>
+  <%= link_to(post_path(post.id), class: "post-link text-dark") do %>
+    <div class="post-title">
+      <%= post.title %>
+    </div>
+  <% end %>
   <br>
   <%= link_to(post_path(post.id), class: "post-link") do %>
     <% post.images.each do |image| %>
@@ -24,7 +26,7 @@
         <%= button_to "", like_path(like), class: "unlike", method: :delete %>
       <% end %>
     <% end %>
-    <%= link_to(likes_path) do %>
+    <%= link_to(likes_path, class: "post-link") do %>
     <h6 class="text-primary">
       <%= post.likes.count %> Likes
     </h6>

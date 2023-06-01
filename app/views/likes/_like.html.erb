@@ -2,8 +2,8 @@
   <% if like.user.avatar.attached? %>
     <%= image_tag like.user.avatar, class: "rounded-circle", style: "width: 110px; height: 110px;" %>
   <% end %>
-  <%= link_to(like.user) do %>
-    <h5 style="margin-top: 20px;"> <%= like.user.username %> </h5>
+  <%= link_to(like.user, class: "post-link") do %>
+    <h5 class= "text-dark", style="margin-top: 20px;"> <%= like.user.username %> </h5>
   <% end %>
 </div>
 
