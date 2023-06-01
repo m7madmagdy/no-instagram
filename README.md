@@ -1,6 +1,6 @@
 # Instagram Clone Website
 
-## I will deploy this app to Fly.io ASAP
+## [Deployed on Fly.io](https://insta-clo.fly.dev)
 
 **Dependencies**
 
@@ -32,3 +32,4 @@ $ make console
 ```
 ## Website Screenshots
 
+<img src="https://i.imgur.com/LP17KZC.png">
