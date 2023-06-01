@@ -1,7 +1,5 @@
 # Instagram Clone Website
 
-## [Deployed on Fly.io](https://insta-clo.fly.dev)
-
 **Dependencies**
 
 - [Docker](https://www.docker.com/)
