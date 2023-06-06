@@ -14,7 +14,7 @@
   <br>
   <%= link_to(post_path(post.id), class: "post-link") do %>
     <% post.images.each do |image| %>
-      <%= image_tag(image, style: "object-fit: cover;, width: 400px; height: 400px;") %>
+      <%= image_tag(image, class: "rounded", style: "object-fit: cover;, width: 400px; height: 400px;") %>
     <% end %>
   <% end %>
   <div style="margin-top: 10px;">
