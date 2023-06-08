@@ -28,9 +28,17 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
-
+  
     respond_to do |format|
       if @post.save
+        if params[:post][:attachment].present?
+          response = ImgurUploader.upload(params[:post][:attachment].tempfile.path)
+          resource_id = response['data']['id']
+          resource_type = response['data']['type']
+          resource_url = response['data']['link']
+          attachment = AttachmentRepo.new(@post, response, resource_id, resource_type, resource_url)
+          attachment.create_attachment
+        end
         format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
@@ -71,6 +79,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :description, :keywords, :user_id, images: [])
+      params.require(:post).permit(:title, :description, :keywords, :user_id)
     end
 end
