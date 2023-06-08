@@ -7,7 +7,6 @@
 # Ignore bundler config.
 /.bundle
 vendor
-
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-*
@@ -34,3 +33,4 @@ vendor
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+environment.env
