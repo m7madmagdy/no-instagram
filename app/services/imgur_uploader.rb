@@ -14,7 +14,6 @@ class ImgurUploader
     https.use_ssl = true
 
     request = Net::HTTP::Post.new(uri.path)
-    # request['Authorization'] = ENV['IMGUR_CLIENT_ID']
     request['Authorization'] = "Bearer 853af53a1bfd5cec9e14a66ac4d4f4e9057b9240"
     request.set_form_data(params)
     response = https.request(request)

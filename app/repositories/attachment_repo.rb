@@ -8,7 +8,7 @@ class AttachmentRepo
     end
 
     def create_attachment
-        attachment = @content.attachments.create(
+        @content.attachments.create(
             raw_response: @raw_response, 
             resource_id: @resource_id, 
             resource_type: @resource_type,
