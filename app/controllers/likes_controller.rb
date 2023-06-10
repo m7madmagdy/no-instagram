@@ -1,7 +1,8 @@
 class LikesController < ApplicationController
 
   def index
-    @likes = Like.includes(:user, :post).all
+    @post = Post.find(params[:post_id])
+    @likes = @post.likes.includes(:user)
   end
 
   def create
