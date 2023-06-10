@@ -1,10 +1,9 @@
 <div class="row">
   <h4 style="text-align: left">Following</h4>
   <div class="col-12 text-center" style="padding: 20px; background-color: #f2f2f2;">
-
-    <% if user.avatar.attached? %>
-      <%= image_tag user.avatar, class: "rounded-circle", style: "width: 130px; height: 130px;" %>
-    <% end %>
+      <% user.avatars.each do |av| %>
+        <img src="<%= av.avatar_url %>" class="rounded-circle" style="width: 30px; height: 30px" />
+      <% end %>
     <div>
       <h4>
         <%= link_to user.username, user, class: "text-primary", style: "text-decoration: none;" %>

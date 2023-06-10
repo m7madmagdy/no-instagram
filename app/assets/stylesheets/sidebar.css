@@ -1,0 +1,42 @@
+/* Style the sidebar */
+.sidebar {
+    color: #a4a4a4;
+    padding: 20px;
+}
+
+/* Style the sidebar links */
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+    width: 100%; /* Make the li match the parent width */
+}
+
+.sidebar ul li a {
+    color: #000000;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+    background-color: rgb(192, 200, 224);
+}
+
+/* Style the sidebar icons */
+.sidebar ul li a i {
+    margin-right: 10px;
+    align-items: center;
+    padding: 8px;
+}
+
+/* Style the main content */
+.content {
+    margin-left: 220px;
+    padding: 20px;
+}
