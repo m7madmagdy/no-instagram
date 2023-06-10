@@ -3,9 +3,13 @@ Rails.application.routes.draw do
   get "posts/myposts"
   root "posts#index"
 
-  resources :posts
+
+  resources :posts do
+    resources :likes, only: [:index]
+  end
+
   resources :comments
-  resources :likes, only: [:index, :create, :destroy]
+  resources :likes, only: [:create, :destroy]
 
   devise_scope :user do
     get "/users", to: "devise/registrations#new"

@@ -26,10 +26,10 @@
         <%= button_to "", like_path(like), class: "unlike", method: :delete %>
       <% end %>
     <% end %>
-    <%= link_to(likes_path, class: "post-link") do %>
-    <h6 class="text-primary">
-      <%= post.likes.count %> Likes
-    </h6>
+    <%= link_to(post_likes_path(post), class: "post-link") do %>
+      <h6 class="text-primary">
+        <%= post.likes.count %> Likes
+      </h6>
     <% end %>
   </div>
 </div>
