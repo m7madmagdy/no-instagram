@@ -4,7 +4,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
   protect_from_forgery with: :null_session
 
-
   def create
     build_resource(sign_up_params)
     resource_saved = resource.save
