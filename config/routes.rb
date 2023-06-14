@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :likes, only: [:create, :destroy]
 
   devise_scope :user do
-    get "/users", to: "devise/registrations#new"
+    get "/users/sign_up", to: "devise/registrations#new"
     get "/users/sign_out", to: "devise/sessions#destroy"
   end
   devise_for :users, controllers: {

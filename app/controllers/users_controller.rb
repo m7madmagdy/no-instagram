@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :follow, :unfollow, :accept, :decline, :cancel]
-  before_action :authenticate_user!
+  before_action :set_user, only: [:show, :destroy,:follow, :unfollow, :accept, :decline, :cancel]
+  before_action :authenticate_user!, except: [:index, :show]
+
+  def index
+    @users = User.all.order(id: :desc)
+  end
 
   def show; end
 
@@ -30,6 +34,12 @@ class UsersController < ApplicationController
     redirect_to users_path(@user)
   end
 
+  def destroy
+    @user.destroy 
+    redirect_to users_path
+  end
+
+  private
   def set_user
     @user = User.find(params[:id])
   end

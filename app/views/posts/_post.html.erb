@@ -14,7 +14,7 @@
   <br>
   <%= link_to(post_path(post.id), class: "post-link") do %>
     <% post.attachments.each do |image| %>
-      <img src="<%= image.resource_url %>" class="rounded" style="max-width:100%;" /> 
+      <img src="<%= image.resource_url %>" class="rounded" style="max-width:100%;" loading="lazy" /> 
     <% end %>
   <% end %>
   <div style="margin-top: 10px;">
