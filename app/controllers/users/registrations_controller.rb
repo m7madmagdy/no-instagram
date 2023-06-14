@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :configure_account_update_params, only: [:update]
   protect_from_forgery with: :null_session
 
   def create
@@ -42,14 +41,40 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def update
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
   
+    if update_resource(resource, account_update_params)
+      if params[:user][:avatar].present?
+        response = ImgurUploader.upload(params[:user][:avatar].tempfile.path)
+        avatar_id = response["data"]["id"]
+        avatar_type = response["data"]["type"]
+        avatar_url = response["data"]["link"]
+        resource.avatars.destroy_all
+        resource.avatars.create(
+          raw_response: response,
+          avatar_id: avatar_id,
+          avatar_type: avatar_type,
+          avatar_url: avatar_url
+        )
+      end
+      set_flash_message :notice, :updated if is_flashing_format?
+      bypass_sign_in resource, scope: resource_name
+      respond_with resource, location: after_update_path_for(resource)
+    else
+      clean_up_passwords resource
+      set_minimum_password_length
+      respond_with resource
+    end
+  end
+
   protected
 
   def sign_up_params
     params.require(:user).permit(:email, :password, :password_confirmation, :bio, :username, avatar_attributes: [ :raw_response, :avatar_id, :avatar_type, :avatar_url ] )
   end
 
-  def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :bio, :avatar])
+  def account_update_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :current_password, :bio, :username, avatar_attributes: [:raw_response, :avatar_id, :avatar_type, :avatar_url])
   end
 end

@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user
+  before_action :set_user, only: [:show, :follow, :unfollow, :accept, :decline, :cancel]
   before_action :authenticate_user!
-
-  def index; end
 
   def show; end
 
