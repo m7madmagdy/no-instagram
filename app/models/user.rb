@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   extend Devise::Models
+  before_create :generate_token
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -16,5 +17,9 @@ class User < ApplicationRecord
 
   def unfollow(user)
     followerable_relationships.where(followable_id: user.id).destroy_all
+  end
+
+  def generate_token
+    self.token = "#{id}/#{SecureRandom.urlsafe_base64(nil, false)}"
   end
 end

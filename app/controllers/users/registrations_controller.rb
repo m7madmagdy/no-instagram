@@ -11,18 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     if resource_saved
       if resource.active_for_authentication?
-        if params[:user][:avatar].present?
-          response = ImgurUploader.upload(params[:user][:avatar].tempfile.path)
-          avatar_id = response["data"]["id"]
-          avatar_type = response["data"]["type"]
-          avatar_url = response["data"]["link"]
-            resource.avatars.create(
-              raw_response: response,
-              avatar_id: avatar_id,
-              avatar_type: avatar_type,
-              avatar_url: avatar_url
-            )
-        end
+        check_avatar_params
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
@@ -44,20 +33,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
   
-    if update_resource(resource, account_update_params)
-      if params[:user][:avatar].present?
-        response = ImgurUploader.upload(params[:user][:avatar].tempfile.path)
-        avatar_id = response["data"]["id"]
-        avatar_type = response["data"]["type"]
-        avatar_url = response["data"]["link"]
-        resource.avatars.destroy_all
-        resource.avatars.create(
-          raw_response: response,
-          avatar_id: avatar_id,
-          avatar_type: avatar_type,
-          avatar_url: avatar_url
-        )
-      end
+    if update_resource(resource, update_params)
+      check_avatar_params
       set_flash_message :notice, :updated if is_flashing_format?
       bypass_sign_in resource, scope: resource_name
       respond_with resource, location: after_update_path_for(resource)
@@ -70,11 +47,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def sign_up_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :bio, :username, avatar_attributes: [ :raw_response, :avatar_id, :avatar_type, :avatar_url ] )
+  def check_avatar_params
+    if params[:user][:avatar].present?
+      response = ImgurUploader.upload(params[:user][:avatar].tempfile.path)
+      avatar_id = response["data"]["id"]
+      avatar_type = response["data"]["type"]
+      avatar_url = response["data"]["link"]
+      resource.avatars.destroy_all
+      resource.avatars.create(
+        raw_response: response,
+        avatar_id: avatar_id,
+        avatar_type: avatar_type,
+        avatar_url: avatar_url
+      )
+    end
   end
 
-  def account_update_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :current_password, :bio, :username, avatar_attributes: [:raw_response, :avatar_id, :avatar_type, :avatar_url])
+  def sign_up_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :bio, :username, :token, avatar_attributes: [ :raw_response, :avatar_id, :avatar_type, :avatar_url ] )
+  end
+
+  def update_params
+    params.require(:user).permit(:email, :token, :password, :password_confirmation, :current_password, :bio, :username, avatar_attributes: [:raw_response, :avatar_id, :avatar_type, :avatar_url])
   end
 end
