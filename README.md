@@ -30,4 +30,4 @@ $ make console
 ```
 ## Website Screenshots
 
-<img src="https://i.imgur.com/LP17KZC.png">
+<img src="https://i.imgur.com/ZNu4o2V.png">
