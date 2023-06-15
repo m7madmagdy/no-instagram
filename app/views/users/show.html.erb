@@ -1,9 +1,14 @@
 <div class="row">
   <div class="col-12 text-center" style="padding: 20px; background-color: #f2f2f2;">
 
-    <% @user.avatars.each do |av| %>
-      <img src="<%= av.avatar_url %>" class="rounded-circle" style="width: 180px; height: 180px"/>
+    <% if @user.avatars.empty?%>
+        <img src="https://i.imgur.com/9nMvJ1e.png" class="rounded-circle" style="width: 160px; height: 160px"/>
+    <% else %>
+        <% @user.avatars.each do |av| %>
+          <img src="<%= av.avatar_url %>" class="rounded-circle" style="width: 160px; height: 160px"/>
+        <% end %>
     <% end %>
+    <br>
     <h1> <%= @user.username %> </h1>
     <h5> <%= @user.email %> </h5>
     <h5> <%= @user.bio %> </h5>

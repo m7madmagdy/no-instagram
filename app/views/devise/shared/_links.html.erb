@@ -6,7 +6,8 @@
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <div>
+  <br/>
+  <span>
     <pre>Don't have account? <strong><%= link_to "Sign up", new_registration_path(resource_name), class: "nav-link text-primary" %></strong></pre>
-  </div>
+  </span>
 <% end %>
