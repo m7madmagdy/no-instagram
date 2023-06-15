@@ -15,6 +15,12 @@ class User < ApplicationRecord
 
   followability
 
+  enum role: { user: 0, admin: 1 }, _default: :user
+
+  def admin?
+    role == 'admin'
+  end
+
   def unfollow(user)
     followerable_relationships.where(followable_id: user.id).destroy_all
   end

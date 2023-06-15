@@ -64,10 +64,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def sign_up_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :bio, :username, :token, avatar_attributes: [ :raw_response, :avatar_id, :avatar_type, :avatar_url ] )
+    params.require(:user).permit(:email, :password, :password_confirmation, :bio, :username, :token, :role, avatar_attributes: [ :raw_response, :avatar_id, :avatar_type, :avatar_url ] )
   end
 
   def update_params
-    params.require(:user).permit(:email, :token, :password, :password_confirmation, :current_password, :bio, :username, avatar_attributes: [:raw_response, :avatar_id, :avatar_type, :avatar_url])
+    params.require(:user).permit(:email, :token, :password, :password_confirmation, :current_password, :bio, :username, :role, avatar_attributes: [:raw_response, :avatar_id, :avatar_type, :avatar_url])
   end
 end

@@ -33,6 +33,11 @@
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
       </div>
       <br>
+      <div class="field">
+        <%= f.label :role %>
+        <%= f.select :role, User.roles.map(&:first), {prompt:'select'}, {class: "form-control"}%>
+      </div>
+      <br>
       <div class="actions">
         <%= f.submit "Sign up", class: "btn btn-primary col-12" %>
       </div>
