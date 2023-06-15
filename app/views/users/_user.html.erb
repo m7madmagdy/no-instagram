@@ -1,18 +1,18 @@
 <div class="row">
   <div class="col-12 text-center" style="padding: 20px; background-color: #f2f2f2;">
 
-      <div class="post-link">
-        <%= link_to(user, class:"post-link") do%>
-          <% user.avatars.each do |av| %>
-            <img src="<%= av.avatar_url %>" class="rounded-circle" style="width: 130px; height: 130px" />
-          <% end %>
-        <%end%>
-      </div>
+    <div class="post-link">
+      <%= link_to(user, class: "post-link") do %>
+        <% user.avatars.each do |av| %>
+          <img src="<%= av.avatar_url %>" class="rounded-circle" style="width: 130px; height: 130px"/>
+        <% end %>
+      <% end %>
+    </div>
 
-      <div class="post-link">
-        <%= link_to(user, class: "text-dark post-link", style: "text-decoration: none;") do%>
+    <div class="post-link">
+      <%= link_to(user, class: "text-dark post-link", style: "text-decoration: none;") do %>
         <h4 style="margin-top: 10px;">
-          <%=user.username %>
+          <%= user.username %>
         </h4>
       <% end %>
     </div>

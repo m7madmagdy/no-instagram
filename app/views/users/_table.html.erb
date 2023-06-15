@@ -1,43 +1,43 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <div class="col-14">
-            <div class="main-box clearfix">
-                    <div class="table-responsive">
-                        <table class="table user-list">
-                            <thead>
-                                <tr>
-                                    <th><span>User</span></th>
-                                    <th><span>Created</span></th>
-                                    <th><span>Email</span></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% @users.each do |user| %>
-                                    <tr>
-                                        <td>
-                                            <% user.avatars.each do |av| %>
-                                                <img src="<%= av.avatar_url %>" class="rounded-circle" style="width: 50px; height: 50px" />
-                                            <% end %>
-                                            <h4 class="nav-link">
-                                                <strong><%= user.username %></strong>
-                                            </h4>
-                                        </td>
-                                        <td><%= user.created_at %></td>
-                                        <td>
-                                            <a href="#">
-                                                <strong><%= user.email %></strong>
-                                            </a>
-                                        </td>
-                                        <td style="width: 20%;">
-                                            <%= button_to(user, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-danger") do %>
-                                            <i class="fa fa-trash"></i>
-                                                <span class="ms-1 d-none d-sm-inline"><strong>Delete User</strong></span>
-                                            <% end %>
-                                        </td>
-                                    </tr>
-                                <% end %>
-                            </tbody>
-                        </table>
-                    </div>
+<div class="col-14">
+  <div class="main-box clearfix">
+    <div class="table-responsive">
+      <table class="table user-list">
+        <thead>
+        <tr>
+          <th><span>User</span></th>
+          <th><span>Created</span></th>
+          <th><span>Email</span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <% user.avatars.each do |av| %>
+                <img src="<%= av.avatar_url %>" class="rounded-circle" style="width: 50px; height: 50px"/>
+              <% end %>
+              <h4 class="nav-link">
+                <strong><%= user.username %></strong>
+              </h4>
+            </td>
+            <td><%= user.created_at %></td>
+            <td>
+              <a href="#">
+                <strong><%= user.email %></strong>
+              </a>
+            </td>
+            <td style="width: 20%;">
+              <%= button_to(user, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-danger") do %>
+                <i class="fa fa-trash"></i>
+                <span class="ms-1 d-none d-sm-inline"><strong>Delete User</strong></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
 

@@ -6,6 +6,7 @@ class ProfilesController < ApplicationController
   end
 
   private
+
   def search
     @query = User.ransack(username_cont: search_query)
     @users = @query.result(distinct: true)
