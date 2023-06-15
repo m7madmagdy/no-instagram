@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :destroy, :follow, :unfollow, :accept, :decline, :cancel]
-  before_action :authenticate_user!, except: [:show, :index]
+  before_action :authenticate_user!
 
   def index
-    @users = search
+    @users = search.where.not(id: current_user.id)
   end
 
   def show; end

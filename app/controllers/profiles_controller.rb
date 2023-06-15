@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @users = search
+    @users = search.where.not(id: current_user.id)
   end
 
   private
