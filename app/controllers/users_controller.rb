@@ -35,8 +35,14 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to users_path
+    respond_to do |format|
+      if current_user.admin?
+        @user.destroy
+        format.html { redirect_to users_path, alert: "User deleted." }
+      else
+        format.html { redirect_to users_path, alert: "You don't have permission to do that." }
+      end
+    end
   end
 
   private
