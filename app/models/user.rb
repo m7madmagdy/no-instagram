@@ -22,4 +22,8 @@ class User < ApplicationRecord
   def generate_token
     self.token = "#{id}/#{SecureRandom.urlsafe_base64(nil, false)}"
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    super + %w[bio created_at email id remember_created_at reset_password_sent_at reset_password_token token updated_at username]
+  end
 end

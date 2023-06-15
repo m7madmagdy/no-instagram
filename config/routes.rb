@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'profiles/index'
   get "home/about"
   get "posts/myposts"
   root "posts#index"

@@ -1,2 +1,39 @@
-<%= render 'table' %>
+<br>
+<div style="margin: 20px;">
+    <%= form_with url: profiles_index_path, method: :get do |form|%>
+        <%= form.search_field :query, value: params[:query], placeholder: "Search user..", class: "form-control form-control-lg"%>
+        <br>
+        <%= form.submit "Search", class: "btn btn-primary col-12"%>
+    <% end %>
+</div>
 
+<% if !@query.nil? %>
+    <%else%>
+    <% if !@users[0].present? %>
+        <div class="alert alert-warning" role="alert">
+            <h3>
+            No Users found!
+            </h3>
+        </div>
+    <%else%>
+        <div class="text-center">
+            <% @users.each do |user| %>
+                <%= render user %>
+            <% end %>
+         </div>
+    <% end %>
+<% end %>
+
+<div style="margin: 20px;">
+    <h3> All Users </h3>
+
+    <% unless @users.empty?%>
+        <%= render 'table' %>
+    <%else%>
+        <div class="alert alert-warning" role="alert">
+            <h2>
+            No users found!
+            </h2>
+        </div>
+    <% end %>
+</div>
