@@ -1,7 +1,18 @@
 <%= stylesheet_link_tag("post") %>
 <p style="color: green"><%= notice %></p>
-<div id="posts" class="text-center">
-  <% @posts.each do |post| %>
-    <%= render post %>
-  <% end %>
-</div>
+
+<% if !@posts.empty? %>
+  <div id="posts" class="text-center">
+    <% @posts.each do |post| %>
+      <%= render post %>
+    <% end %>
+  </div>
+  <%else%>
+  <div id="posts" class="text-center">
+    <h3 class="alert alert-warning">There are no posts to show</h3>
+      <%= link_to(new_post_path, class: "btn btn-primary btn-lg") do %>
+        <i class="fa fa-plus-circle"></i>
+        <span class="ms-1 d-none d-sm-inline"><strong>Create Post</strong></span>
+      <% end %>
+  </div>
+<% end %>

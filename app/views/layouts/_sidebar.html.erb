@@ -4,16 +4,18 @@
       <% if user_signed_in? %>
         <%= link_to(current_user, class: "nav-link post-link") do %>
           <% if current_user.avatars.empty? %>
-            <%= image_tag "https://i.imgur.com/Zi3m1dl.png", class: "rounded-circle", width: "40", height: "40" %>
+            <%= image_tag "https://i.imgur.com/9nMvJ1e.png", class: "rounded-circle", width: "45", height: "45", loading: 'lazy' %>
           <% else %>
             <% current_user.avatars.each do |av| %>
-              <%= image_tag av.avatar_url, class: 'rounded-circle', width: '40', height: '40', loading: 'lazy' %>
+              <%= image_tag av.avatar_url, class: 'rounded-circle', width: '45', height: '45', loading: 'lazy' %>
             <% end %>
           <% end %>
-          <span class="d-none d-sm-inline mx-1 text-light"><strong><%= current_user.username %></strong></span>
+          <span class="d-none d-sm-inline mx-1 text-light">
+              <strong class="text-center", style="font-size: 20px;"><%= current_user.username %></strong>
+          </span>
         <% end %>
       <% else %>
-        <%= image_tag "https://i.imgur.com/Zi3m1dl.png", class: "rounded-circle", width: "40", height: "40" %>
+        <%= image_tag "https://i.imgur.com/9nMvJ1e.png", class: "rounded-circle", width: "40", height: "40" %>
         <span class="d-none d-sm-inline mx-1 text-light">Guest</span>
       <% end %>
     </a>
@@ -137,6 +139,12 @@
   </div>
   <div class="main-content">
     <%= yield %>
+    <p class="main-content text-warning">
+      <strong><%= notice %></strong>
+    </p>
+    <p class="main-content text-danger">
+      <strong><%= alert %></strong>
+    </p>
   </div>
 </div>
 
