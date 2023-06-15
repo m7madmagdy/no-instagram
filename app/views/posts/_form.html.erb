@@ -1,4 +1,4 @@
-<div class="col-xl-4 col-md-16 col-sm-8 col-10 post-container">
+<div class="col-xl-5 post-container">
   <%= form_with(model: post) do |form| %>
     <div>
       <% invalid = post.errors.include?(:title) %>
@@ -35,6 +35,7 @@
     </div>
     <br>
     <div>
+      <%= form.label :add_photo, style: "display: block" %>
       <%= form.file_field :attachment, multiple: false %>
     </div>
     <br>
