@@ -18,6 +18,7 @@ gem 'net-pop'
 gem 'net-smtp'
 gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'followability', github: 'nejdetkadir/followability', branch: 'main'
+gem 'ransack' # search
 
 group :development, :test do
   gem 'byebug', platforms: %I[mri mingw x64_mingw]

@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :destroy,:follow, :unfollow, :accept, :decline, :cancel]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:show]
 
   def index
-    @users = User.all.order(id: :desc)
+    @users = search
   end
 
   def show; end
@@ -42,5 +42,14 @@ class UsersController < ApplicationController
   private
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def search
+    @query = User.ransack(username_cont: search_query)
+    @users = @query.result(distinct: true)
+  end
+
+  def search_query
+    params[:query]
   end
 end
