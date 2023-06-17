@@ -11,7 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     if resource_saved
       if resource.active_for_authentication?
-        check_avatar_params
+        upload_avatar
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
@@ -34,7 +34,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
   
     if update_resource(resource, update_params)
-      check_avatar_params
+      upload_avatar
       set_flash_message :notice, :updated if is_flashing_format?
       bypass_sign_in resource, scope: resource_name
       respond_with resource, location: after_update_path_for(resource)
@@ -47,19 +47,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def check_avatar_params
+  def upload_avatar
     if params[:user][:avatar].present?
-      response = ImgurUploader.upload(params[:user][:avatar].tempfile.path)
+      response = ImgurUploader.upload(params[:user][:avatar].tempfile.path).compact.first
       avatar_id = response["data"]["id"]
       avatar_type = response["data"]["type"]
       avatar_url = response["data"]["link"]
-      resource.avatars.destroy_all
-      resource.avatars.create(
-        raw_response: response,
-        avatar_id: avatar_id,
-        avatar_type: avatar_type,
-        avatar_url: avatar_url
-      )
+      avatar_repo = AvatarRepo.new(resource, response, avatar_id, avatar_type, avatar_url)
+      avatar_repo.create_avatar
     end
   end
 

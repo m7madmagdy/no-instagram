@@ -8,8 +8,8 @@ class ImgurUploader
 
   def self.upload(image_paths)
     images_data = []
-    
-    image_paths.each do |image_path|
+  
+    Array(image_paths).each do |image_path|
       image_data = Base64.encode64(File.read(image_path, mode: 'rb'))
       params = { image: image_data }
       uri = URI.parse(BASE_URL)
@@ -22,7 +22,7 @@ class ImgurUploader
       response = https.request(request)
       images_data << JSON.parse(response.body)
     end
-
+  
     images_data
   end
 end

@@ -1,8 +1,6 @@
 <div id="<%= dom_id post %>" class="post-container">
   <%= link_to(post.user, class: 'nav-link post-link', style: "text-align: left;") do %>
-    <% post.user.avatars.each do |av| %>
-      <%= image_tag av.avatar_url, class: 'rounded-circle', width: '40', height: '40', loading: 'lazy' %>
-    <% end %>
+    <%= image_tag post.user.avatar.avatar_url, class: 'rounded-circle', width: '40', height: '40', loading: 'lazy', style: "object-fit: cover;" %>
     <span class="d-none d-sm-inline mx-1 text-dark"><strong><%= post.user.username %></strong></span>
   <% end %>
   <br>

@@ -85,12 +85,8 @@ class PostsController < ApplicationController
       resource_id = image_data['data']['id']
       resource_type = image_data['data']['type']
       resource_url = image_data['data']['link']
-      @post.attachments.create(
-        raw_response: image_data.to_json,
-        resource_id: resource_id,
-        resource_type: resource_type,
-        resource_url: resource_url
-      )
+      attachment_repo = AttachmentRepo.new(@post, response, resource_id, resource_type, resource_url)
+      attachment_repo.create_attachment
     end
   end
 end
