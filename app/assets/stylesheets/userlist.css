@@ -14,7 +14,7 @@ body{
     margin-bottom: 16px;
     -webikt-border-radius: 3px;
     -moz-border-radius: 3px;
-    border-radius: 3px;
+    border-radius: 8px;
 }
 .table a.table-link.danger {
     color: #e74c3c;
@@ -63,7 +63,7 @@ a {
     padding: 12px 8px;
 }
 a:hover{
-text-decoration:none;
+    text-decoration:none;
 }
 
   
