@@ -1,7 +1,7 @@
 RSpec.describe ImgurUploader do
     let(:image_path) { 'spec/fixture_files/1.jpeg' }
     let(:expected_response) do
-      { 'data' => { 'id' => '3O9qUDG', 'type' => 'image/png' }, 'success' => true }
+      [{ 'data' => { 'id' => '3O9qUDG', 'type' => 'image/png' }, 'success' => true }]
     end
   
     let(:imgur_response) do

@@ -65,5 +65,11 @@ a {
 a:hover{
     text-decoration:none;
 }
-
   
+.username {
+    width: 100%;
+    display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

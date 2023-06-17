@@ -30,7 +30,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        upload_image if params[:post][:attachment].present?
+        upload_image
         format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
@@ -78,15 +78,17 @@ class PostsController < ApplicationController
   end
 
   def upload_image
-    attachments = Array(params[:post][:attachment])
-    image_paths = attachments.map { |attachment| attachment.tempfile.path if attachment.present? }.compact
-    response = ImgurUploader.upload(image_paths)
-    response.each do |image_data|
-      resource_id = image_data['data']['id']
-      resource_type = image_data['data']['type']
-      resource_url = image_data['data']['link']
-      attachment_repo = AttachmentRepo.new(@post, response, resource_id, resource_type, resource_url)
-      attachment_repo.create_attachment
+    if params[:post][:attachment].present?
+      attachments = Array(params[:post][:attachment])
+      image_paths = attachments.map { |attachment| attachment.tempfile.path if attachment.present? }.compact
+      response = ImgurUploader.upload(image_paths)
+      response.each do |image_data|
+        resource_id = image_data['data']['id']
+        resource_type = image_data['data']['type']
+        resource_url = image_data['data']['link']
+        attachment_repo = AttachmentRepo.new(@post, response, resource_id, resource_type, resource_url)
+        attachment_repo.create_attachment
+      end
     end
   end
 end

@@ -13,17 +13,16 @@
         <tbody>
         <% @users.each do |user| %>
           <tr>
-            <td class="post-link">
-              <% if user.avatar.avatar_url.nil?%>
-                <img src="https://i.imgur.com/9nMvJ1e.png" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;"/>
-              <% else %>
-                <img src="<%= user.avatar.avatar_url %>" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;"/>
-              <% end %>
-
-              <%= link_to(user, class: "post-link") do%>
-                <h4 class="nav-link text-dark">
-                  <strong><%= user.username %></strong>
-                </h4>
+            <td class="post-link ">
+              <%= link_to(user, class: "post-link username") do%>
+                <% if user.avatar.nil?%>
+                  <img src="https://i.imgur.com/9nMvJ1e.png" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;"/>
+                <% else %>
+                  <img src="<%= user.avatar.avatar_url %>" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;"/>
+                <% end %>
+                  <h5 class="nav-link text-dark">
+                    <strong><%= user.username %></strong>
+                  </h5>
               <% end %>
             </td>
             <td>

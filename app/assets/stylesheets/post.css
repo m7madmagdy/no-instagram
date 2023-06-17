@@ -25,6 +25,8 @@
 
 .post-link {
     text-decoration: none;
+    display: inline-block;
+    width: 100%;
 }
 
 .post-link:hover {
