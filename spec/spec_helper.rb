@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'webmock/rspec'
-require 'rails_helper'
 
 if ENV['COV']
   require 'simplecov'
@@ -32,6 +31,5 @@ RSpec.configure do |config|
 
     DatabaseCleaner.start
     DatabaseCleaner.clean
-    # REDIS_CLIENT.flushall
   end
 end

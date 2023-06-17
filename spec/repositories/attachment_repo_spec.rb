@@ -17,7 +17,6 @@ RSpec.describe AttachmentRepo, type: :repo do
       expect(last_attachment.resource_id).to eq(attachment.resource_id)
       expect(last_attachment.resource_type).to eq(attachment.resource_type)
       expect(last_attachment.resource_url).to eq(attachment.resource_url)
-      expect(attachment.resource_url).to eq(attachment.resource_url)
     end
   end
 end
