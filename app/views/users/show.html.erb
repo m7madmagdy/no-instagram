@@ -1,12 +1,10 @@
 <div class="row">
   <div class="col-12 text-center" style="padding: 20px; background-color: #f2f2f2;">
 
-    <% if @user.avatars.empty?%>
-        <img src="https://i.imgur.com/9nMvJ1e.png" class="rounded-circle" style="width: 160px; height: 160px"/>
+    <% if @user.avatar.nil?%>
+        <img src="https://i.imgur.com/9nMvJ1e.png" class="rounded-circle" style="width: 160px; height: 160px; object-fit: cover;"/>
     <% else %>
-        <% @user.avatars.each do |av| %>
-          <img src="<%= av.avatar_url %>" class="rounded-circle" style="width: 160px; height: 160px"/>
-        <% end %>
+        <img src="<%= @user.avatar.avatar_url %>" class="rounded-circle" style="width: 160px; height: 160px; object-fit: cover;"/>
     <% end %>
     <br>
     <h1> <%= @user.username %> </h1>

@@ -1,14 +1,18 @@
 <div class="row post-container", style="margin-top: 30px;">
   <div class="col-12" style="margin: auto; margin-top: 30px; margin-bottom: 30px;">
-    <h2>Log in</h2>
+    <div style="display: flex; align-items: center;">
+      <h2 style="margin-right: auto;">Log in</h2>
+      <strong class="text-warning">Hint, all forms with * are required</strong>
+    </div>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <br>
       <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        <%= f.label :email %> <span class="text-danger">*</span><br>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "name@example.com" %>
       </div>
       <br>
       <div class="field">
-        <%= f.label :password %><br />
+        <%= f.label :password %> <span class="text-danger">*</span><br>
         <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
       </div>
       <br>

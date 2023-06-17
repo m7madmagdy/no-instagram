@@ -1,8 +1,6 @@
 <div id="<%= dom_id post %>" class="post-container">
   <%= link_to(post.user, class: 'nav-link post-link', style: "text-align: left;") do %>
-    <% post.user.avatars.each do |av| %>
-      <%= image_tag av.avatar_url, class: 'rounded-circle', width: '40', height: '40', loading: 'lazy' %>
-    <% end %>
+    <%= image_tag post.user.avatar.avatar_url, class: 'rounded-circle', width: '40', height: '40', loading: 'lazy', style: "object-fit: cover;" %>
     <span class="d-none d-sm-inline mx-1 text-dark"><strong><%= post.user.username %></strong></span>
   <% end %>
   <br>
@@ -13,11 +11,19 @@
   <% end %>
   <br>
   <%= link_to(post_path(post.id), class: "post-link") do %>
-    <% post.attachments.each do |image| %>
-      <img src="<%= image.resource_url %>" class="rounded" style="max-width:100%;" loading="lazy"/>
+    <% if post.attachments.count > 1 %>
+      <div class="image-container">
+        <% post.attachments.each do |image| %>
+          <img src="<%= image.resource_url %>" class="rounded" loading="lazy"/>
+        <% end %>
+      </div>
+    <%else%>
+      <% post.attachments.each do |image| %>
+          <img src="<%= image.resource_url %>" class="rounded" style="max-width: 100%" loading="lazy"/>
+      <% end %>
     <% end %>
   <% end %>
-  <div style="margin-top: 10px;">
+  <div style="margin-top: 10px;" class="text-center">
     <% if user_signed_in? %>
       <% like = current_user.likes.find_by(post: post) %>
       <% if like.nil? %>

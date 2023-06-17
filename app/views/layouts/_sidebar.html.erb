@@ -3,12 +3,10 @@
     <a href="/posts" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
       <% if user_signed_in? %>
         <%= link_to(current_user, class: "nav-link post-link") do %>
-          <% if current_user.avatars.empty? %>
-            <%= image_tag "https://i.imgur.com/9nMvJ1e.png", class: "rounded-circle", width: "45", height: "45", loading: 'lazy' %>
+          <% if current_user.avatar.nil? %>
+            <%= image_tag "https://i.imgur.com/9nMvJ1e.png", class: "rounded-circle", width: "45", height: "45", loading: 'lazy', style: "object-fit: cover;" %>
           <% else %>
-            <% current_user.avatars.each do |av| %>
-              <%= image_tag av.avatar_url, class: 'rounded-circle', width: '45', height: '45', loading: 'lazy' %>
-            <% end %>
+            <%= image_tag current_user.avatar.avatar_url, class: 'rounded-circle', width: '45', height: '45', loading: 'lazy', style: "object-fit: cover;" %>
           <% end %>
           <span class="d-none d-sm-inline mx-1 text-light">
               <strong class="text-center", style="font-size: 20px;"><%= current_user.username %></strong>
