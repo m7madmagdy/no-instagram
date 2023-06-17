@@ -22,8 +22,7 @@ class PostsController < ApplicationController
   end
 
   # GET /posts/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /posts or /posts.json
   def create
@@ -31,14 +30,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        if params[:post][:attachment].present?
-          response = ImgurUploader.upload(params[:post][:attachment].tempfile.path)
-          resource_id = response['data']['id']
-          resource_type = response['data']['type']
-          resource_url = response['data']['link']
-          attachment = AttachmentRepo.new(@post, response, resource_id, resource_type, resource_url)
-          attachment.create_attachment
-        end
+        upload_image if params[:post][:attachment].present?
         format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
@@ -52,6 +44,8 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
+        @post.attachments.destroy_all
+        upload_image if params[:post][:attachment].present?
         format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
         format.json { render :show, status: :ok, location: @post }
       else
@@ -81,5 +75,22 @@ class PostsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def post_params
     params.require(:post).permit(:title, :description, :keywords, :user_id)
+  end
+
+  def upload_image
+    attachments = Array(params[:post][:attachment])
+    image_paths = attachments.map { |attachment| attachment.tempfile.path if attachment.present? }.compact
+    response = ImgurUploader.upload(image_paths)
+    response.each do |image_data|
+      resource_id = image_data['data']['id']
+      resource_type = image_data['data']['type']
+      resource_url = image_data['data']['link']
+      @post.attachments.create(
+        raw_response: image_data.to_json,
+        resource_id: resource_id,
+        resource_type: resource_type,
+        resource_url: resource_url
+      )
+    end
   end
 end
