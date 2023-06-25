@@ -1,6 +1,10 @@
 <div id="<%= dom_id post %>" class="post-container">
   <%= link_to(post.user, class: 'nav-link post-link', style: "text-align: left;") do %>
-    <%= image_tag post.user.avatar.avatar_url, class: 'rounded-circle', width: '40', height: '40', loading: 'lazy', style: "object-fit: cover;" %>
+    <% if post.user.avatar.nil? %>
+      <%= image_tag "https://i.imgur.com/9nMvJ1e.png", class: "rounded-circle", width: "45", height: "45", loading: 'lazy', style: "object-fit: cover;" %>
+    <% else %>
+      <%= image_tag post.user.avatar.avatar_url, class: 'rounded-circle', width: '40', height: '40', loading: 'lazy', style: "object-fit: cover;" %>
+    <% end %>
     <span class="d-none d-sm-inline mx-1 text-dark"><strong><%= post.user.username %></strong></span>
   <% end %>
   <br>

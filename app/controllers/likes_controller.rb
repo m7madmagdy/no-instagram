@@ -9,7 +9,7 @@ class LikesController < ApplicationController
     @like = current_user.likes.new(likes_params)
     @like.save
     respond_to do |format|
-      format.js { render 'posts/like' }
+      redirect_path = post_path(@like.post)
     end
   end
 
@@ -17,7 +17,7 @@ class LikesController < ApplicationController
     @like = current_user.likes.find(params[:id])
     @like.destroy
     respond_to do |format|
-      format.js { render 'posts/like' }
+      redirect_path = post_path(@like.post)
     end
   end
 
