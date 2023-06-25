@@ -4,11 +4,11 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.includes(:user, :likes).all
+    @posts = Post.includes(:user, :likes).order(id: :desc).all
   end
 
   def myposts
-    @posts = Post.includes(:user, :likes).where(user_id: current_user.id)
+    @posts = Post.includes(:user, :likes).order(id: :desc).where(user_id: current_user.id)
   end
 
   # GET /posts/1 or /posts/1.json

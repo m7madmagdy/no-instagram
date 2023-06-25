@@ -7,10 +7,7 @@ class LikesController < ApplicationController
 
   def create
     @like = current_user.likes.new(likes_params)
-
-    unless @like.save
-      flash[:alert] = "You already liked this post"
-    end
+    @like.save
     respond_to do |format|
       format.js { render 'posts/like' }
     end
