@@ -7,18 +7,13 @@ class LikesController < ApplicationController
 
   def create
     @like = current_user.likes.new(likes_params)
-    @like.save
-    respond_to do |format|
-      redirect_path = post_path(@like.post)
-    end
+    redirect_to root_path if @like.save
   end
 
   def destroy
     @like = current_user.likes.find(params[:id])
     @like.destroy
-    respond_to do |format|
-      redirect_path = post_path(@like.post)
-    end
+    redirect_to root_path
   end
 
   def likes_params
