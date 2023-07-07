@@ -26,7 +26,6 @@ $ make up
 
 ## Website Screenshots
 
-<img src="https://i.imgur.com/qjjBlRs.png" width="350"> <img src="https://i.imgur.com/LvQtzV0.png" width="350">
-<img src="https://i.imgur.com/FasiUSV.png" width="350"> <img src="https://i.imgur.com/VqrCxDA.png" width="350">
-<img src="https://i.imgur.com/2vcsCMO.png" width="350"> <img src="https://i.imgur.com/TdR6ZHI.png" width="350">
-<img src="https://i.imgur.com/RNyzQhP.png" width="500">
+<img src="https://i.imgur.com/qjjBlRs.png" width="400"> <img src="https://i.imgur.com/LvQtzV0.png" width="400">
+<img src="https://i.imgur.com/FasiUSV.png" width="400"> <img src="https://i.imgur.com/VqrCxDA.png" width="400">
+<img src="https://i.imgur.com/2vcsCMO.png" width="400"> <img src="https://i.imgur.com/RNyzQhP.png" width="400">
