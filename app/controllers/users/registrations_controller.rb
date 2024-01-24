@@ -3,6 +3,8 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   protect_from_forgery with: :null_session
 
+  include Attachable
+
   def create
     build_resource(sign_up_params)
     resource_saved = resource.save
@@ -11,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     if resource_saved
       if resource.active_for_authentication?
-        upload_avatar
+        upload_avatar(params, resource) if params[:user][:avatar].present?
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
@@ -34,7 +36,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
   
     if update_resource(resource, update_params)
-      upload_avatar
+      upload_avatar(params, resource) if params[:user][:avatar].present?
       set_flash_message :notice, :updated if is_flashing_format?
       bypass_sign_in resource, scope: resource_name
       respond_with resource, location: after_update_path_for(resource)
@@ -46,17 +48,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   protected
-
-  def upload_avatar
-    if params[:user][:avatar].present?
-      response = ImgurUploader.upload(params[:user][:avatar].tempfile.path).compact.first
-      avatar_id = response["data"]["id"]
-      avatar_type = response["data"]["type"]
-      avatar_url = response["data"]["link"]
-      avatar_repo = AvatarRepo.new(resource, response, avatar_id, avatar_type, avatar_url)
-      avatar_repo.create_avatar
-    end
-  end
 
   def sign_up_params
     params.require(:user).permit(:email, :password, :password_confirmation, :bio, :username, :token, :role, avatar_attributes: [ :raw_response, :avatar_id, :avatar_type, :avatar_url ] )

@@ -1,24 +1,24 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem "rails", "~> 7.0.4"
-gem "sprockets-rails"
-gem 'pg', '~> 1.4'
-gem "puma", "~> 5.0"
-gem "importmap-rails"
-gem "turbo-rails"
-gem "stimulus-rails"
-gem "jbuilder"
-gem "redis", "~> 4.0"
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
-gem "bootsnap", require: false
+gem 'bootsnap', require: false
+gem 'devise', '~> 4.9', '>= 4.9.2'
+gem 'followability', github: 'nejdetkadir/followability', branch: 'main'
 gem 'httparty'
+gem 'importmap-rails'
+gem 'jbuilder'
 gem 'net-imap'
 gem 'net-pop'
 gem 'net-smtp'
-gem 'devise', '~> 4.9', '>= 4.9.2'
-gem 'followability', github: 'nejdetkadir/followability', branch: 'main'
+gem 'pg', '~> 1.4'
+gem 'puma', '~> 5.0'
+gem 'rails', '~> 7.0.4'
 gem 'ransack' # search
+gem 'redis', '~> 4.0'
+gem 'sprockets-rails'
+gem 'stimulus-rails'
+gem 'turbo-rails'
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
   gem 'byebug', platforms: %I[mri mingw x64_mingw]
@@ -41,4 +41,3 @@ group :test do
   gem 'database_cleaner-active_record'
   gem 'simplecov', require: false
 end
-gem 'tzinfo-data', platforms: %I[mingw mswin x64_mingw jruby]

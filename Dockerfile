@@ -16,11 +16,11 @@ RUN apt-get update && apt-get install -y \
 
 RUN gem install bundler
 
+
 WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
-RUN bundle install
-
+RUN bundle install --jobs 20 --retry 5
 
 COPY entrypoint.sh ./
 RUN chmod +x entrypoint.sh

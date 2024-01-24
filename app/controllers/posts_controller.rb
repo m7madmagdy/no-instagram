@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: %i[ index show ]
+  before_action :set_post, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[index show]
+
+  include Attachable
 
   # GET /posts or /posts.json
   def index
@@ -27,11 +29,10 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
-
     respond_to do |format|
       if @post.save
-        upload_image
-        format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
+        upload_attachments(params, @post) if params[:post][:attachment].present?
+        format.html { redirect_to post_url(@post), notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -45,8 +46,8 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.update(post_params)
         @post.attachments.destroy_all
-        upload_image if params[:post][:attachment].present?
-        format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
+        upload_attachments(params, @post) if params[:post][:attachment].present?
+        format.html { redirect_to post_url(@post), notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,7 +61,7 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
+      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -75,20 +76,5 @@ class PostsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def post_params
     params.require(:post).permit(:title, :description, :keywords, :user_id)
-  end
-
-  def upload_image
-    if params[:post][:attachment].present?
-      attachments = Array(params[:post][:attachment])
-      image_paths = attachments.map { |attachment| attachment.tempfile.path if attachment.present? }.compact
-      response = ImgurUploader.upload(image_paths)
-      response.each do |image_data|
-        resource_id = image_data['data']['id']
-        resource_type = image_data['data']['type']
-        resource_url = image_data['data']['link']
-        attachment_repo = AttachmentRepo.new(@post, response, resource_id, resource_type, resource_url)
-        attachment_repo.create_attachment
-      end
-    end
   end
 end
