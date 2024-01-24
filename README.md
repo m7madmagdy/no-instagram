@@ -16,16 +16,10 @@
 
 - up and run dependencies
 ```sh
-$ make build
+$ make build || make up
 ```
 
-- start rails server
+- start rails console
 ```sh
-$ make up
+$ make console
 ```
-
-## Website Screenshots
-
-<img src="https://i.imgur.com/qjjBlRs.png" width="400"> <img src="https://i.imgur.com/LvQtzV0.png" width="400">
-<img src="https://i.imgur.com/FasiUSV.png" width="400"> <img src="https://i.imgur.com/VqrCxDA.png" width="400">
-<img src="https://i.imgur.com/2vcsCMO.png" width="400"> <img src="https://i.imgur.com/RNyzQhP.png" width="400">
